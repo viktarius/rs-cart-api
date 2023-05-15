@@ -1,17 +1,25 @@
-import { Controller, Get, Req, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Req, HttpStatus, Inject } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Carts } from '../database/entities/carts.entity';
+import { Repository } from 'typeorm';
 
 @Controller('api/v3/carts')
 export class CartController {
 
-  @Get()
-  findUserCart(@Req() req: any) {
-    // const cart = this.cartService.findOrCreateByUserId(getUserIdFromRequest(req));
+    constructor(
+        @InjectRepository(Carts)
+        private cartRepository: Repository<Carts>
+    ) {}
 
-    return {
-      statusCode: HttpStatus.OK,
-      message: 'OK',
-      data: { carts: [{ id: 'id-1' }] },
+    @Get()
+    async findUserCart(@Req() req: any) {
+        // const cart = this.cartService.findOrCreateByUserId(getUserIdFromRequest(req));
+        const carts = await this.cartRepository.find();
+        return {
+            statusCode: HttpStatus.OK,
+            message: 'OK',
+            body: { carts },
+        }
     }
-  }
 
 }
