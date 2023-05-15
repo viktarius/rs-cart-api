@@ -3,7 +3,7 @@ import { Carts } from './carts.entity';
 
 @Entity()
 export class CartInfo {
-    @OneToOne(() => Carts)
+    @OneToOne(() => Carts, { onDelete: "CASCADE" })
     @JoinColumn({ name: 'cart_id', referencedColumnName: 'id' })
     @PrimaryColumn({type: 'uuid', nullable: false})
     cart_id: string;

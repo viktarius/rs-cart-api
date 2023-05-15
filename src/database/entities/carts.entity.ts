@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
 import { CartInfo } from './cart-info.entity';
 import { ECartStatus } from '../../cart/models/cart.model';
 
@@ -18,4 +18,7 @@ export class Carts {
 
     @Column({ type: 'enum', enum: ECartStatus })
     status: ECartStatus;
+
+    @OneToOne(() => CartInfo, (cartInfo) => cartInfo.cart_id, { onDelete: "CASCADE" })
+    cart_info: CartInfo
 }
