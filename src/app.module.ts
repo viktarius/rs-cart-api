@@ -29,6 +29,7 @@ import { OrderModule } from './order/order.module';
             logging: true,
             namingStrategy: new SnakeNamingStrategy(),
             synchronize: true,
+            autoLoadEntities: true,
         }),
         CartModule,
         OrderModule
