@@ -9,8 +9,6 @@ export class CartService {
     constructor(
         @InjectRepository(Carts)
         private cartRepository: Repository<Carts>,
-        @InjectRepository(CartInfo)
-        private cartInfoRepository: Repository<CartInfo>,
         private dataSource: DataSource
     ) {}
 
@@ -19,7 +17,7 @@ export class CartService {
     }
 
     findOne(id: string) {
-        return this.cartRepository.find({
+        return this.cartRepository.findOne({
             where: { id },
             relations: { cart_info: true }
         })

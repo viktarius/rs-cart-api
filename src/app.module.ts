@@ -8,6 +8,8 @@ import { Carts } from './database/entities/carts.entity';
 import { CartInfo } from './database/entities/cart-info.entity';
 import SnakeNamingStrategy from 'typeorm-naming-strategy';
 import { DataSource } from 'typeorm';
+import { Orders } from './database/entities/orders.entity';
+import { OrderModule } from './order/order.module';
 
 @Module({
     imports: [
@@ -23,12 +25,13 @@ import { DataSource } from 'typeorm';
             username: 'postgres',
             password: 'postgres',
             database: 'cloud_x',
-            entities: [Carts, CartInfo],
+            entities: [Carts, CartInfo, Orders],
             logging: true,
             namingStrategy: new SnakeNamingStrategy(),
             synchronize: true,
         }),
-        CartModule
+        CartModule,
+        OrderModule
     ],
     controllers: [AppController],
 })

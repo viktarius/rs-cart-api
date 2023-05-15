@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinTable, ManyToOne, OneToMany } from "typeorm"
 import { CartInfo } from './cart-info.entity';
 import { ECartStatus } from '../../cart/models/cart.model';
+import { Orders } from './orders.entity';
 
 @Entity()
 export class Carts {
@@ -20,5 +21,9 @@ export class Carts {
     status: ECartStatus;
 
     @OneToOne(() => CartInfo, (cartInfo) => cartInfo.cart_id, { onDelete: "CASCADE" })
+    @JoinTable()
     cart_info: CartInfo
+
+    @OneToMany(() => Orders, (order) => order.cart)
+    order: Orders[]
 }
