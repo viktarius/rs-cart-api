@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { Carts } from '../database/entities/carts.entity';
 import { DataSource } from 'typeorm';
 import { CartInfo } from '../database/entities/cart-info.entity';
+import { Users } from '../database/entities/user.entity';
+
 @Injectable()
 export class CartService {
     constructor(
@@ -19,18 +21,21 @@ export class CartService {
     findOne(id: string) {
         return this.cartRepository.findOne({
             where: { id },
-            relations: { cart_info: true }
+            relations: { cart_info: true, user: true }
         })
     }
 
     async create(body: any) {
-        const {created_at, updated_at, count, status} = body;
+        const { created_at, updated_at, count, status, user_id } = body;
         try {
-            await this.dataSource.transaction( async manager => {
+            await this.dataSource.transaction(async manager => {
+                const user = await manager.findOneBy(Users, { id: user_id });
+
                 const cart = await manager.save(Carts, {
                     created_at,
                     updated_at,
-                    status
+                    status,
+                    user
                 })
 
                 await manager.save(CartInfo, {
