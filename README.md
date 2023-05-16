@@ -1,4 +1,4 @@
-## Task 7 (Authorization)
+## Task 8 Integration with RDS
 
 ### Evaluation criteria (70 points for covering all criteria)
 Reviewers should verify the lambda functions by invoking them through provided URLs.
