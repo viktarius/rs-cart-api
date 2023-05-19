@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
-const carts = [{
+let carts = [{
     id: 'ac80028e-2a17-4396-962d-2d3fae2e35e8',
     created_at: '05-19-2023',
     updated_at: '05-19-2023',
@@ -48,6 +48,7 @@ export class CartLocalService {
     }
 
     public deleteById(cart_id: string) {
-        return Promise.resolve(carts.filter(({ id }) => id !== cart_id))
+        carts = carts.filter(({ id }) => id !== cart_id);
+        return Promise.resolve(true)
     }
 }
