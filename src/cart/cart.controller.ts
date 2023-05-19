@@ -1,10 +1,10 @@
-import { Controller, Get, Req, HttpStatus, Inject, Post, Param, Delete, Body } from '@nestjs/common';
-import { CartService } from './cart.service';
+import { Controller, Get, HttpStatus, Inject, Post, Param, Delete, Body } from '@nestjs/common';
+import { CartLocalService } from './cart-local.service';
 
 @Controller('api/v3/carts')
 export class CartController {
-    @Inject(CartService)
-    private readonly cartService: CartService;
+    @Inject(CartLocalService)
+    private readonly cartService: CartLocalService;
 
     @Get()
     async findAllCarts() {
@@ -38,7 +38,7 @@ export class CartController {
     @Delete(':id')
     async deleteCartById(@Param() params: any) {
         try {
-            await this.cartService.deteleById(params.id);
+            await this.cartService.deleteById(params.id);
             return {
                 statusCode: HttpStatus.OK,
                 message: `cart with id: ${ params.id } deleted`

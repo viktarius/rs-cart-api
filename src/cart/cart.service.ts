@@ -49,7 +49,7 @@ export class CartService {
         }
     }
 
-    deteleById(id: string) {
+    deleteById(id: string) {
         return this.cartRepository.delete({ id })
     }
 }
