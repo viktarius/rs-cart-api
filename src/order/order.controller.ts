@@ -1,10 +1,11 @@
 import { Body, Controller, Delete, Get, HttpStatus, Inject, Param, Post } from '@nestjs/common';
-import { OrderService } from './order.service';
+import { OrderLocalService } from './order-local.service';
+// import { OrderService } from './order.service';
 
 @Controller('api/v3/orders')
 export class OrderController {
-    @Inject(OrderService)
-    private readonly orderService: OrderService
+    @Inject(OrderLocalService)
+    private readonly orderService: OrderLocalService
 
     @Get()
     async findAllOrders() {
@@ -17,7 +18,7 @@ export class OrderController {
 
     @Get(':id')
     async findOneOrder(@Param() params: any) {
-        const order = await this.orderService.findById(params.id);
+        const order = await this.orderService.findOne(params.id);
         return {
             statusCode: HttpStatus.OK,
             body: { order },
@@ -35,7 +36,7 @@ export class OrderController {
 
     @Delete(':id')
     async deleteOrderById(@Param() params: any) {
-        const result = await this.orderService.delete(params.id);
+        const result = await this.orderService.deleteById(params.id);
         return {
             statusCode: result ? HttpStatus.OK: HttpStatus.INTERNAL_SERVER_ERROR,
             result

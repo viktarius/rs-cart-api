@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { CartModule } from './cart/cart.module';
-// import { OrderModule } from './order/order.module';
+import { OrderModule } from './order/order.module';
 // import { TypeOrmModule } from '@nestjs/typeorm';
 // import * as process from 'process';
 // import { Carts } from './database/entities/carts.entity';
@@ -26,8 +26,8 @@ import { CartModule } from './cart/cart.module';
         //     synchronize: true,
         //     autoLoadEntities: true,
         // }),
-        // OrderModule,
-        CartModule
+        CartModule,
+        OrderModule
     ],
     controllers: [AppController],
 })

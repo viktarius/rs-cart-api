@@ -22,7 +22,7 @@ export class OrderService {
         })
     }
 
-    findById(id: string) {
+    findOne(id: string) {
         return this.ordersRepository.findOne(
             {
                 where: { id },
@@ -51,9 +51,9 @@ export class OrderService {
         }
     }
 
-    async delete(id: string) {
+    async deleteById(id: string) {
         try {
-            const order = await this.findById(id);
+            const order = await this.findOne(id);
             await this.dataSource.manager.save(Orders, { ...order, status: ECartStatus.ORDERED })
             return true;
         } catch (e) {
