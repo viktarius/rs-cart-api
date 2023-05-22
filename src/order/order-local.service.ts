@@ -16,7 +16,7 @@ export class OrderLocalService {
     public create(body: any): Promise<boolean> {
         orders.push({
             id: uuidv4(),
-            body
+            ...body
         });
         return Promise.resolve(true)
     }
