@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 
 let orders = [];
 
@@ -13,7 +14,10 @@ export class OrderLocalService {
     }
 
     public create(body: any): Promise<boolean> {
-        orders.push(body);
+        orders.push({
+            id: uuidv4(),
+            body
+        });
         return Promise.resolve(true)
     }
 
