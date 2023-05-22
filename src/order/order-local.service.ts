@@ -22,7 +22,7 @@ export class OrderLocalService {
     }
 
     public deleteById(order_id: string): Promise<boolean> {
-        orders = orders.filter(({ id }) => id === order_id);
+        orders = orders.filter(({ id }) => id !== order_id);
         return Promise.resolve(true)
     }
 }
